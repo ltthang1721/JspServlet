@@ -104,4 +104,19 @@ public class Book {
     public void setCategoryID(String categoryID) {
         this.categoryID = categoryID;
     }
+
+
+    public String toString() {
+        System.out.println("bookID: "+bookID);
+        System.out.println("name: "+name);
+        System.out.println("quantity: "+quantity);
+        System.out.println("price: "+price);
+        System.out.println("images: "+images);
+        System.out.println("priority: "+priority);
+        System.out.println("genreID: "+genreID);
+        System.out.println("publisherID: "+publisherID);
+        System.out.println("authorID: "+authorID);
+        System.out.println("categoryID: "+categoryID);
+        return bookID;
+    }
 }

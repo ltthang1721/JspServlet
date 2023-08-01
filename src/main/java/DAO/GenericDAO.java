@@ -8,11 +8,15 @@ import java.util.List;
 
 public abstract class GenericDAO {
     public Connection getConnection(){
+
         Connection conn = null;
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ex1", "root", "1721");
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return conn;
     }
