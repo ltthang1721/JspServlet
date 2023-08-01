@@ -11,22 +11,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-@WebServlet(urlPatterns = {"/listSach/*","/insertBook"})
-public class BookController extends HttpServlet {
-    private BookDAO bookDAO = new BookDAO();
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String pathInfo = request.getPathInfo();
-        request.setCharacterEncoding("UTF-8");
-        if(pathInfo == null){
-            request.setAttribute("Book", bookDAO.getAll());
-            RequestDispatcher rd = request.getRequestDispatcher("/view/web/listSach.jsp");
-            rd.forward(request,response);
-        }
-        else {
-            RequestDispatcher rd = request.getRequestDispatcher("/view/web/insertBook.jsp");
-            rd.forward(request,response);
-        }
+import java.util.Optional;
 
+@WebServlet(urlPatterns = {"/book/*"})
+public class BookController extends HttpServlet {
+    private final BookDAO bookDAO = new BookDAO();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String filePath = "/view/web/";
+        Optional<String> pathInfo = Optional.ofNullable(request.getPathInfo());
+        request.setCharacterEncoding("UTF-8");
+        if (pathInfo.isPresent() && pathInfo.get().equals("/create")){
+            filePath = filePath + "insertBook.jsp";
+        } else {
+            request.setAttribute("Book", bookDAO.getAll());
+            filePath = filePath + "listBook.jsp";
+        }
+        RequestDispatcher rd = request.getRequestDispatcher(filePath);
+        rd.forward(request,response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");

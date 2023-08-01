@@ -19,11 +19,6 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.33</version>
     </dependency>
-      <dependency>
-          <groupId>javax.inject</groupId>
-          <artifactId>javax.inject</artifactId>
-          <version>1.4.2</version>
-      </dependency>
     <dependency>
       <groupId>javax.inject</groupId>
       <artifactId>javax.inject</artifactId>
@@ -47,5 +42,15 @@
   </dependencies>
   <build>
     <finalName>JspServlet</finalName>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>8</source>
+                  <target>8</target>
+              </configuration>
+          </plugin>
+      </plugins>
   </build>
 </project>
