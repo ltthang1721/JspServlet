@@ -12,9 +12,10 @@ import java.sql.PreparedStatement;
 
 public class BookDAO extends GenericDAO{
     public String insert(BookDTO book){
-        String query = "INSERT INTO sach" + "(MaSach, TenSach, MaTL, MaNXB, MaTG, SL, GiaTien, Hinh, UuTien, MaDM) VALUES" + "(?,?,?,?,?,?,?,?,?,?);";
+        String query = "INSERT INTO book" + "(bookID, name, genreID, publisherID, authorID, quantity, price, images, priority, categoryID) VALUES" + "(?,?,?,?,?,?,?,?,?,?);";
         List<Object> list = new ArrayList<Object>();
-        list.add("ID"+ book.name);
+
+        list.add(autoIncrease("BOOK",1));
         list.add(book.name);
         list.add(book.genreID);
         list.add(book.publisherID);
@@ -29,7 +30,7 @@ public class BookDAO extends GenericDAO{
 
     public List<Book> getAll(){
         List<Book> listBook = new ArrayList<>();
-        String query = "SELECT *FROM sach";
+        String query = "SELECT *FROM book";
         Connection conn = getConnection();
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -39,13 +40,13 @@ public class BookDAO extends GenericDAO{
                 Book book = new Book();
                 book.setBookID(rs.getString(1));
                 book.setName(rs.getString(2));
-                book.setGenreID(rs.getString(3));
-                book.setPublisherID(rs.getString(4));
-                book.setAuthorID(rs.getString(5));
-                book.setQuantity(rs.getInt(6));
-                book.setPrice(rs.getInt(7));
-                book.setImages(rs.getString(8));
-                book.setPriority(rs.getInt(9));
+                book.setGenreID(rs.getString(7));
+                book.setPublisherID(rs.getString(8));
+                book.setAuthorID(rs.getString(9));
+                book.setQuantity(rs.getInt(3));
+                book.setPrice(rs.getFloat(4));
+                book.setImages(rs.getString(5));
+                book.setPriority(rs.getInt(6));
                 book.setCategoryID(rs.getString(10));
                 listBook.add(book);
             }
@@ -53,5 +54,23 @@ public class BookDAO extends GenericDAO{
             throw new RuntimeException(e);
         }
     return listBook;
+    }
+
+    public String autoIncrease(String s, int increase){
+        String idNumber = "00000000";
+        int lengthIdNumber = idNumber.length();
+        int idIncrease = 1;
+        String id = getLastID();
+        if(id == null){
+           idNumber = idNumber.substring(s.length()-1, lengthIdNumber);
+        } else {
+            int lengthId = id.length();
+            idNumber = id.substring(s.length(), lengthId);
+            int idInt = Integer.parseInt(idNumber);
+            idIncrease = idInt + increase;
+            String idS =  String.valueOf(idInt+increase);
+            idNumber = idNumber.substring(0, idNumber.length()- idS.length());
+        }
+        return s + idNumber + idIncrease;
     }
 }

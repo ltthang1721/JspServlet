@@ -32,16 +32,16 @@ public class BookController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
-        String matl = request.getParameter("matl");
-        String manxb = request.getParameter("manxb");
-        String matg = request.getParameter("matg");
-        int sl = Integer.parseInt(request.getParameter("sl"));
-        float giatien = Float.parseFloat(request.getParameter("giatien"));
-        String hinh = request.getParameter("hinh");
-        int uutien = Integer.parseInt(request.getParameter("uutien"));
-        String madm = request.getParameter("madm");
+        String genreID = request.getParameter("genreID");
+        String publisherID = request.getParameter("publisherID");
+        String authorID = request.getParameter("authorID");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        float price = Float.parseFloat(request.getParameter("price"));
+        String images = request.getParameter("images");
+        int priority = Integer.parseInt(request.getParameter("priority"));
+        String categoryID = request.getParameter("categoryID");
 
-        bookDAO.insert(new BookDTO(name,matl,manxb,matg,sl,giatien,hinh,uutien,madm));
+        bookDAO.insert(new BookDTO(name,genreID,publisherID,authorID,quantity,price,images,priority,categoryID));
 
         if(name.isEmpty()){
             RequestDispatcher req = request.getRequestDispatcher("view/web/insertBook.jsp");

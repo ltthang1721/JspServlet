@@ -11,15 +11,15 @@ public class BookDTO {
     public String authorID;
     public String categoryID;
 
-    public BookDTO(String name, String matl, String manxb, String matg, int sl, float giatien, String hinh, int uutien, String madm) {
+    public BookDTO(String name, String genreID, String publisherID, String authorID, int quantity, float price, String images, int priority, String categoryID) {
         this.name = name;
-        this.genreID = matl;
-        this.publisherID = manxb;
-        this.authorID = matg;
-        this.quantity = sl;
-        this.price = giatien;
-        this.images = hinh;
-        this.priority = uutien;
-        this.categoryID = madm;
+        this.genreID = genreID;
+        this.publisherID = publisherID;
+        this.authorID = authorID;
+        this.quantity = quantity;
+        this.price = price;
+        this.images = images;
+        this.priority = priority;
+        this.categoryID = categoryID;
     }
 }

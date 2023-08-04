@@ -1,16 +1,16 @@
 package Model;
 
-public class Staff {
-    private String staffId;
+public class Employee {
+    private String employeeID;
     private String name;
     private String phoneNumber;
     private String email;
     private String role;
 
-    public Staff() {
+    public Employee() {
     }
-    public Staff(String staffId, String name, String phoneNumber, String email, String role) {
-        this.staffId = staffId;
+    public Employee(String employeeID, String name, String phoneNumber, String email, String role) {
+        this.employeeID = employeeID;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -18,12 +18,12 @@ public class Staff {
     }
 
 
-    public String getStaffId() {
-        return staffId;
+    public String getEmployeeID() {
+        return employeeID;
     }
 
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
+    public void setEmployeeID(String employeeID) {
+        this.employeeID = employeeID;
     }
 
     public String getName() {

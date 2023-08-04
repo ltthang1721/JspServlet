@@ -1,9 +1,6 @@
 package DAO;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public abstract class GenericDAO {
@@ -12,7 +9,7 @@ public abstract class GenericDAO {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ex1", "root", "1721");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/bookstore", "root", "1721");
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         } catch (ClassNotFoundException e) {
@@ -39,5 +36,22 @@ public abstract class GenericDAO {
         }
         return null;
     }
+    public String getLastID(){
+        String query = "SELECT bookID FROM book ORDER BY bookID DESC LIMIT 1;";
+        Connection conn = getConnection();
+        String id = null;
 
+        try {
+            conn.prepareStatement(query);
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()){
+               id = rs.getString(1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id;
+    }
 }
