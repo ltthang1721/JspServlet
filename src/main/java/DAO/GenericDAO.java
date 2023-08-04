@@ -1,5 +1,7 @@
 package DAO;
 
+import Model.Book;
+
 import java.sql.*;
 import java.util.List;
 
