@@ -11,7 +11,7 @@ public abstract class GenericDAO {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/bookstore", "root", "17201");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/bookstore", "root", "1721");
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         } catch (ClassNotFoundException e) {

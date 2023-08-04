@@ -6,8 +6,8 @@
 <body>
 <h2>List Book!</h2>
 
-<table border ="1" width="1000" align="center">
-    <tr bgcolor="00FF7F">
+<table border ="1" width="1000" align="center" >
+    <tr bgcolor="pink" >
         <th><b>ID Sách</b></th>
         <th><b>Tên Sách</b></th>
         <th><b>Mã Thể Loại</b></th>

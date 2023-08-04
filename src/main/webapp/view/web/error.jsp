@@ -12,10 +12,9 @@
     <title>Error</title>
 </head>
 <body>
-Error
     <h1>
 
-        <%=request.getAttribute("Book")%>
+        <%=request.getAttribute("Book")%> already exists!
     </h1>
 </body>
 </html>

@@ -90,36 +90,6 @@ public class BookDAO extends GenericDAO{
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         }
-
         return id;
     }
-
-    /*public String getId(String n){
-        String query = "SELECT bookID FROM book WHERE name=?";
-        PreparedStatement preparedStatement = null;
-        String id = null;
-        Connection conn = getConnection();
-
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-            ResultSet rs = preparedStatement.executeQuery(query);
-
-            while (rs.next()){
-                Book book = new Book();
-                book.setBookID(rs.getString(1));
-                book.setName(rs.getString(2));
-                book.setGenreID(rs.getString(7));
-                book.setPublisherID(rs.getString(8));
-                book.setAuthorID(rs.getString(9));
-                book.setQuantity(rs.getInt(3));
-                book.setPrice(rs.getFloat(4));
-                book.setImages(rs.getString(5));
-                book.setPriority(rs.getInt(6));
-                book.setCategoryID(rs.getString(10));
-                listBook.add(book);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 }
