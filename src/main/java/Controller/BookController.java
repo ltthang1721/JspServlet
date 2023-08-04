@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.BookDAO;
 import DTO.BookDTO;
+import Service.BookService;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -31,6 +32,7 @@ public class BookController extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+
         String name = request.getParameter("name");
         String genreID = request.getParameter("genreID");
         String publisherID = request.getParameter("publisherID");
@@ -40,14 +42,18 @@ public class BookController extends HttpServlet {
         String images = request.getParameter("images");
         int priority = Integer.parseInt(request.getParameter("priority"));
         String categoryID = request.getParameter("categoryID");
+        BookService bookService = new BookService();
 
         bookDAO.insert(new BookDTO(name,genreID,publisherID,authorID,quantity,price,images,priority,categoryID));
 
         if(name.isEmpty()){
             RequestDispatcher req = request.getRequestDispatcher("view/web/insertBook.jsp");
             req.include(request, response);
-        }
-        else {
+        } else if (bookService.isNameExist(name)) {
+            request.setAttribute("Book", name);
+            RequestDispatcher req = request.getRequestDispatcher("view/web/error.jsp");
+            req.forward(request, response);
+        } else {
             RequestDispatcher req = request.getRequestDispatcher("view/web/insert_successfully.jsp");
             req.forward(request, response);
         }

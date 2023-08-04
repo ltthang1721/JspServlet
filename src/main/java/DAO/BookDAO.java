@@ -75,13 +75,14 @@ public class BookDAO extends GenericDAO{
     }
 
     public String getIdByName(String name){
-        String query = "SELECT bookID FROM book WHERE name=" + name;
+        String query = "SELECT bookID FROM book WHERE name= ?";
         PreparedStatement preparedStatement = null;
+        Connection conn = getConnection();
         String id = null;
         try {
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, "Tắt đèn");
-            ResultSet rs = preparedStatement.executeQuery(query);
+            preparedStatement.setString(1, name);
+            ResultSet rs = preparedStatement.executeQuery();
 
             if(rs.next()){
                id = rs.getString(1);
@@ -93,7 +94,7 @@ public class BookDAO extends GenericDAO{
         return id;
     }
 
-    public String getId(String n){
+    /*public String getId(String n){
         String query = "SELECT bookID FROM book WHERE name=?";
         PreparedStatement preparedStatement = null;
         String id = null;
@@ -120,5 +121,5 @@ public class BookDAO extends GenericDAO{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }

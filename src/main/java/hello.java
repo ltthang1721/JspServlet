@@ -1,6 +1,7 @@
 import DAO.*;
 import DTO.BookDTO;
 import Model.Book;
+import Service.BookService;
 
 import java.util.List;
 
@@ -15,7 +16,8 @@ public class hello{
 
 //        System.out.println(bookDAO.autoIncrease("BOO",2));
 //        System.out.println(bookDAO.getLastID());
-        System.out.println(bookDAO.getIdByName("Tắt Đèn"));
-
+       // System.out.println(bookDAO.getIdByName("Tắt Đèn"));
+        BookService bookService = new BookService();
+        System.out.println(bookService.isNameExist("Tắt đèn"));
     }
 }

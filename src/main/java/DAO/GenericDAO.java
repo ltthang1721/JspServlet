@@ -9,7 +9,7 @@ public abstract class GenericDAO {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/bookstore", "root", "1721");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/bookstore", "root", "17201");
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         } catch (ClassNotFoundException e) {
@@ -40,17 +40,28 @@ public abstract class GenericDAO {
         String query = "SELECT bookID FROM book ORDER BY bookID DESC LIMIT 1;";
         Connection conn = getConnection();
         String id = null;
-
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
         try {
             conn.prepareStatement(query);
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-            ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement = conn.prepareStatement(query);
+            rs = preparedStatement.executeQuery();
             if(rs.next()){
                id = rs.getString(1);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+                try {
+                    assert preparedStatement != null;
+                    preparedStatement.close();
+                    assert rs != null;
+                    rs.close();
+                    conn.close();
+                } catch (SQLException e) {
+                    System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+                }
         }
         return id;
     }
