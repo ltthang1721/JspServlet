@@ -15,7 +15,7 @@ public class hello{
 
 //        System.out.println(bookDAO.autoIncrease("BOO",2));
 //        System.out.println(bookDAO.getLastID());
-        bookDAO.getAll();
+        System.out.println(bookDAO.getIdByName("Tắt Đèn"));
 
     }
 }
